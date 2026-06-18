@@ -28,22 +28,24 @@
 
 ## 安装
 
+> 技能内部名为 `loveorder`（全小写，符合 skill 命名规范）；下面的目录名也请用小写。
+
 **方式一 · 直接放进 skills 目录**
 ```bash
-git clone https://github.com/hanya-hu/Loveorder.git ~/.claude/skills/Loveorder
+git clone https://github.com/hanya-hu/Loveorder.git ~/.claude/skills/loveorder
 ```
 
 **方式二 · 安装打包文件**
-下载本仓库的 [`Loveorder.skill`](Loveorder.skill)，在 Claude Code 里安装即可。
+下载本仓库（或 [Releases](https://github.com/hanya-hu/Loveorder/releases)）里的 [`loveorder.skill`](loveorder.skill)，在 Claude Code 里安装即可。
 
-装好后，对 Claude 说「帮我向宇宙下个恋爱定单」「显化我的正缘」「帮我画画我的理想型」之类，就会触发。
+装好后，用 `/loveorder`，或对 Claude 说「帮我向宇宙下个恋爱定单」「显化我的正缘」「帮我画画我的理想型」之类，就会触发。
 
 ---
 
 ## 目录结构
 
 ```
-Loveorder/
+loveorder/
 ├── SKILL.md                      # 主流程（六幕）
 ├── references/questions.md       # 题库：第〇轮建档 + 六轮灵魂问答
 └── assets/dingdan-template.html  # 「致宇宙的定单」文书模板（含发送/保存交互）
