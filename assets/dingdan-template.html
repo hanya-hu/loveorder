@@ -1,0 +1,219 @@
+<!--
+  「致宇宙的定单」文书模板
+  用真实内容替换所有 {{...}} 占位符。可增删段落。
+  占位符说明:
+    {{DATE}}            下单日期,如 二〇二六年六月十八日
+    {{PLACEMENT_NAME}}  下单人(用户的名字或自称)
+    {{COORDINATES}}     建档的基本坐标,每条一个 <li>标签:值</li>
+                        (轨道/年龄区间/国籍/所在地/语言/性格底色/婚恋意向/其他硬性条件,
+                         有几条写几条,用户说"不限"的也照写,如 <li>国籍 · 不限,合适最重要</li>)
+    {{PORTRAIT_PROSE}}  画像的散文段落(2-4 段,每段用 <p>...</p> 包裹)
+    {{TRAITS}}          理想特质清单,每条一个 <li>带 emoji 前缀</li>
+    {{DEALBREAKERS}}    底线清单,每条一个 <li>...</li>
+    {{SIGN}}            认出 ta 的方式 / 暗号(一两句)
+    {{WISH}}            向上天许下的那一个愿望(用户原话或润色)
+    {{SELF_VOW}}        下单人愿意成为的样子(为迎接 ta 的自我承诺)
+-->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>致宇宙的定单</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&display=swap');
+  :root{
+    --ink:#f4ece0; --ink-soft:#cdbfa6; --gold:#e8c87a; --gold-deep:#b8923f;
+    --bg0:#1a1530; --bg1:#241a3d; --bg2:#0e0b1c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg2);}
+  body{
+    font-family:'Noto Serif SC',serif; color:var(--ink);
+    background:radial-gradient(ellipse at 50% -10%, #2e2350 0%, var(--bg0) 38%, var(--bg2) 100%);
+    min-height:100vh; padding:48px 20px; line-height:1.95;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* 星点 */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,.7), transparent),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1.5px 1.5px at 85% 60%, rgba(232,200,122,.6), transparent),
+      radial-gradient(1px 1px at 35% 75%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1px 1px at 55% 50%, rgba(255,255,255,.4), transparent),
+      radial-gradient(1.5px 1.5px at 12% 85%, rgba(232,200,122,.5), transparent);
+  }
+  .scroll{
+    position:relative; z-index:1; max-width:680px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(36,26,61,.92), rgba(20,15,38,.94));
+    border:1px solid rgba(232,200,122,.28);
+    border-radius:18px; padding:60px 52px 52px;
+    box-shadow:0 0 80px rgba(120,90,200,.25), inset 0 0 60px rgba(0,0,0,.35);
+  }
+  .seal{ text-align:center; font-size:30px; letter-spacing:.5em; margin-bottom:6px; }
+  .title{
+    text-align:center; font-weight:700; font-size:30px; letter-spacing:.45em;
+    color:var(--gold); text-indent:.45em; margin:4px 0 4px;
+    text-shadow:0 0 24px rgba(232,200,122,.35);
+  }
+  .subtitle{ text-align:center; color:var(--ink-soft); font-size:13px; letter-spacing:.4em; margin-bottom:30px; }
+  .rule{ height:1px; background:linear-gradient(90deg,transparent,var(--gold-deep),transparent); margin:26px 0; opacity:.7; }
+  .salutation{ font-size:18px; color:var(--gold); margin-bottom:14px; }
+  p{ margin:0 0 16px; font-weight:300; font-size:16.5px; color:var(--ink); }
+  .section-label{
+    color:var(--gold); font-size:14px; letter-spacing:.3em; font-weight:500;
+    margin:30px 0 12px; display:flex; align-items:center; gap:12px;
+  }
+  .section-label::before{ content:"✦"; font-size:11px; color:var(--gold-deep); }
+  ul{ list-style:none; margin:0 0 8px; }
+  ul li{ font-weight:300; font-size:16px; margin:0 0 9px; padding-left:4px; }
+  ul.coords{ display:grid; grid-template-columns:1fr 1fr; gap:6px 28px; }
+  ul.coords li{ font-size:15px; color:var(--ink-soft); border-left:2px solid rgba(232,200,122,.35); padding-left:12px; margin:0; }
+  @media(max-width:560px){ ul.coords{grid-template-columns:1fr} }
+  .wish{
+    text-align:center; font-size:20px; font-weight:400; color:var(--gold);
+    line-height:2.1; margin:14px 0; text-shadow:0 0 20px rgba(232,200,122,.3);
+  }
+  .vow{ font-style:italic; color:var(--ink-soft); font-size:15.5px; }
+  .footer{ margin-top:34px; text-align:right; color:var(--ink-soft); font-size:15px; }
+  .footer .name{ color:var(--gold); font-size:17px; }
+  .blessing{
+    text-align:center; margin-top:30px; color:var(--ink-soft);
+    font-size:13px; letter-spacing:.35em;
+  }
+  /* ── 发送 / 保存 仪式 ── */
+  .actions{ margin-top:36px; text-align:center; }
+  .btn{
+    font-family:inherit; cursor:pointer; color:var(--gold);
+    border:1px solid var(--gold-deep); border-radius:40px;
+    background:linear-gradient(180deg, rgba(232,200,122,.18), rgba(232,200,122,.05));
+    font-size:16px; letter-spacing:.25em; text-indent:.25em; padding:14px 32px;
+    transition:.3s; box-shadow:0 0 0 rgba(232,200,122,0);
+  }
+  .btn:hover{ background:linear-gradient(180deg, rgba(232,200,122,.34), rgba(232,200,122,.12)); box-shadow:0 0 28px rgba(232,200,122,.45); }
+  .btn:active{ transform:scale(.97); }
+  .btn-save{ display:none; margin-top:16px; font-size:14px; letter-spacing:.2em; padding:11px 26px; color:var(--ink-soft); border-color:rgba(232,200,122,.5); }
+  .sent-seal{ display:none; text-align:center; margin-top:30px; }
+  .sent-seal.show{ display:block; }
+  .sent-seal .stamp{
+    display:inline-flex; align-items:center; justify-content:center; flex-direction:column;
+    width:130px; height:130px; border:2px solid var(--gold-deep); border-radius:50%;
+    color:var(--gold); font-size:15px; letter-spacing:.18em; line-height:1.7;
+    box-shadow:0 0 34px rgba(232,200,122,.5), inset 0 0 18px rgba(232,200,122,.18);
+    animation:stampIn .6s cubic-bezier(.2,1.5,.4,1) both;
+  }
+  @keyframes stampIn{ 0%{opacity:0; transform:scale(2.2) rotate(18deg)} 100%{opacity:1; transform:scale(1) rotate(-9deg)} }
+  .scroll.shimmer::after{
+    content:""; position:absolute; inset:0; border-radius:18px; pointer-events:none; mix-blend-mode:screen;
+    background:linear-gradient(115deg, transparent 32%, rgba(255,246,212,.55) 50%, transparent 68%);
+    background-size:300% 100%; animation:sweep 1.5s ease-out;
+  }
+  @keyframes sweep{ 0%{background-position:170% 0} 100%{background-position:-70% 0} }
+  #fxCanvas{ position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:50; }
+  @media print{
+    body{background:#0e0b1c;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .actions,.btn,#fxCanvas{display:none!important}
+  }
+  @media(max-width:560px){ .scroll{padding:40px 26px} .title{font-size:23px;letter-spacing:.3em} }
+</style>
+</head>
+<body>
+  <div class="scroll">
+    <div class="seal">✦ ☾ ✦</div>
+    <div class="title">致宇宙的定单</div>
+    <div class="subtitle">A N · O R D E R · T O · T H E · U N I V E R S E</div>
+
+    <div class="salutation">亲爱的宇宙、亲爱的上天:</div>
+
+    <div class="section-label">ta 的基本坐标</div>
+    <ul class="coords">
+      {{COORDINATES}}
+    </ul>
+
+    {{PORTRAIT_PROSE}}
+
+    <div class="section-label">我所召唤的那个 ta</div>
+    <ul>
+      {{TRAITS}}
+    </ul>
+
+    <div class="section-label">我的底线,也请你记下</div>
+    <ul>
+      {{DEALBREAKERS}}
+    </ul>
+
+    <div class="section-label">我会这样认出 ta</div>
+    <p>{{SIGN}}</p>
+
+    <div class="rule"></div>
+    <div class="section-label">而我向你许下的,只有一个愿望</div>
+    <p class="wish">{{WISH}}</p>
+
+    <div class="section-label">我也向你承诺</div>
+    <p class="vow">{{SELF_VOW}}</p>
+
+    <div class="rule"></div>
+    <div class="footer">
+      此单已下,余事交托。<br>
+      下单人 · <span class="name">{{PLACEMENT_NAME}}</span><br>
+      {{DATE}}
+    </div>
+
+    <div class="blessing">愿 此 愿 被 听 见 · 愿 此 人 在 路 上</div>
+
+    <div class="sent-seal" id="sentSeal"><div class="stamp">✦<br>宇宙<br>已签收<br>✦</div></div>
+
+    <div class="actions">
+      <button class="btn" id="sendBtn">✦ 向宇宙发送此单 ✦</button>
+      <div><button class="btn btn-save" id="saveBtn">保存我的定单 · 打印 / 存为 PDF</button></div>
+    </div>
+  </div>
+
+  <canvas id="fxCanvas"></canvas>
+  <script>
+  (function(){
+    var canvas=document.getElementById('fxCanvas'), ctx=canvas.getContext('2d');
+    var W,H,DPR=Math.min(window.devicePixelRatio||1,2);
+    function resize(){ W=canvas.width=innerWidth*DPR; H=canvas.height=innerHeight*DPR; canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px'; }
+    resize(); addEventListener('resize',resize);
+    var P=[];
+    function spark(x,y,o){ o=o||{}; var a=Math.random()*Math.PI*2, sp=(o.speed||1)*(1+Math.random()*2)*DPR;
+      P.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-(o.lift||0)*DPR,life:1,decay:0.012+Math.random()*0.02,
+        size:(0.8+Math.random()*1.9)*DPR,hue:42+Math.random()*12,twk:Math.random()*6.28}); }
+    function wand(p){ return {x:(0.12+0.76*p)*W, y:(0.8-0.52*Math.sin(p*Math.PI))*H}; }
+    var running=false,raf;
+    function run(){ if(running)return; running=true; var t0=null;
+      function frame(ts){ if(t0===null)t0=ts; var el=(ts-t0)/1000; ctx.clearRect(0,0,W,H);
+        if(el<1.5){ var pp=Math.min(el/1.4,1), pos=wand(pp);
+          for(var i=0;i<14;i++) spark(pos.x+(Math.random()-0.5)*9*DPR,pos.y+(Math.random()-0.5)*9*DPR,{speed:1.4,lift:0.6});
+          ctx.save(); ctx.globalCompositeOperation='lighter';
+          var g=ctx.createRadialGradient(pos.x,pos.y,0,pos.x,pos.y,20*DPR);
+          g.addColorStop(0,'rgba(255,251,230,1)'); g.addColorStop(1,'rgba(255,220,130,0)');
+          ctx.fillStyle=g; ctx.beginPath(); ctx.arc(pos.x,pos.y,20*DPR,0,7); ctx.fill(); ctx.restore(); }
+        ctx.save(); ctx.globalCompositeOperation='lighter';
+        for(var i=P.length-1;i>=0;i--){ var pt=P[i]; pt.x+=pt.vx; pt.y+=pt.vy; pt.vy+=0.05*DPR; pt.vx*=0.99; pt.life-=pt.decay; pt.twk+=0.3;
+          if(pt.life<=0){ P.splice(i,1); continue; }
+          var tw=0.55+0.45*Math.sin(pt.twk); ctx.globalAlpha=pt.life*tw;
+          ctx.fillStyle='hsl('+pt.hue+',100%,'+(70+pt.life*22)+'%)';
+          ctx.beginPath(); ctx.arc(pt.x,pt.y,pt.size*pt.life,0,7); ctx.fill();
+          if(pt.size>1.7*DPR){ ctx.globalAlpha=pt.life*tw*0.5; var s=pt.size*2.4;
+            ctx.fillRect(pt.x-s,pt.y-0.5,s*2,1); ctx.fillRect(pt.x-0.5,pt.y-s,1,s*2); } }
+        ctx.restore();
+        if(el<6 && (P.length>0 || el<1.5)) raf=requestAnimationFrame(frame);
+        else { ctx.clearRect(0,0,W,H); running=false; } }
+      raf=requestAnimationFrame(frame); }
+    var sendBtn=document.getElementById('sendBtn'), saveBtn=document.getElementById('saveBtn'),
+        seal=document.getElementById('sentSeal'), scroll=document.querySelector('.scroll');
+    sendBtn.addEventListener('click',function(){
+      sendBtn.style.display='none'; scroll.classList.add('shimmer'); run();
+      setTimeout(function(){ var cx=W/2,cy=H*0.46; for(var i=0;i<170;i++) spark(cx+(Math.random()-0.5)*44*DPR,cy+(Math.random()-0.5)*44*DPR,{speed:3.2}); },700);
+      setTimeout(function(){ seal.classList.add('show'); },1500);
+      setTimeout(function(){ saveBtn.style.display='inline-block'; },2200);
+    });
+    saveBtn.addEventListener('click',function(){ window.print(); });
+  })();
+  </script>
+</body>
+</html>
