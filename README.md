@@ -1,4 +1,4 @@
-# Loveorder · 向上天下一张定单 ✦
+# loveorder · 向上天下一张定单 ✦
 
 一个有仪式感的 **Claude Code Skill**：通过约 40 道分主题的访谈式问题，带你一步步看清自己理想伴侣的画像，最后生成一封精美的、可亲手「发送给宇宙」并保存收藏的**《致宇宙的定单》**。
 
@@ -32,11 +32,11 @@
 
 **方式一 · 直接放进 skills 目录**
 ```bash
-git clone https://github.com/hanya-hu/Loveorder.git ~/.claude/skills/loveorder
+git clone https://github.com/hanya-hu/loveorder.git ~/.claude/skills/loveorder
 ```
 
 **方式二 · 安装打包文件**
-下载本仓库（或 [Releases](https://github.com/hanya-hu/Loveorder/releases)）里的 [`loveorder.skill`](loveorder.skill)，在 Claude Code 里安装即可。
+下载本仓库（或 [Releases](https://github.com/hanya-hu/loveorder/releases)）里的 [`loveorder.skill`](loveorder.skill)，在 Claude Code 里安装即可。
 
 装好后，用 `/loveorder`，或对 Claude 说「帮我向宇宙下个恋爱定单」「显化我的正缘」「帮我画画我的理想型」之类，就会触发。
 
